@@ -1,2 +1,4 @@
-# graph-da-lib
-My libraries for Data Analytics projects - Includes both Graphing and other usefull functions
+# Some functions for DA and Graphing
+
+Note: This a copy of selected files from Private repository
+Note to self: DO NOT DEVELOP ON THIS REPO - this is just for sharing
