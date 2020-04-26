@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 @author: Pascal Winter
+www.winter-aas.com
 
 Bits and bolts for simple machine learning
 
-1/ DATA EXPLORATION
-2/ UNIVARIATE GRAPHING
-3/ MULTIVARIATE GRAPHING
-5/ GRID SEARCH (Model parametrization)
-6/ MODEL ASSESSMENT
+1. DATA EXPLORATION
+2. FEATURE ENGINEERING
+3. GRID SEARCH
 """
 
 import pandas as pd
@@ -24,7 +23,7 @@ CWD = Path.cwd()
 
 
 #%%#############################################################################
-#BOOK#################### DATA EXPLORATION #####################################
+#BOOK#################### 1. DATA EXPLORATION ##################################
 ################################################################################
 def data_describe(df_data):
     """
@@ -63,7 +62,7 @@ def data_classvars(df_des, icatcutoff = 20):
 
 
 #%%#############################################################################
-#BOOK#################### FEATURE ENGINEER #####################################
+#BOOK#################### 2. FEATURE ENGINEER ##################################
 ################################################################################
 
 # calculating number of bins with that paper........
@@ -92,7 +91,7 @@ def remove_outliers(dF_Data, list_col, dscore):
 
 
 #%%#############################################################################
-#BOOK######################## GRID SEARCH ######################################
+#BOOK######################## 3. GRID SEARCH ###################################
 ################################################################################
 
 

@@ -2,7 +2,10 @@
 """
 Created on Sun Feb 16 19:42:05 2020
 
-@author: XiaoPi
+@author: Pascal Winter
+www.winter-aas.com
+
+
 """
 
 

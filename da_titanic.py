@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan  1 14:54:58 2020
+
 @author: pascal winter
+www.winter-aas.com
+
 """
 
 import pandas as pd

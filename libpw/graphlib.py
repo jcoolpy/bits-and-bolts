@@ -1,21 +1,26 @@
 # -*- coding: utf-8 -*-
 """
 @author: Pascal Winter
+www.winter-aas.com
 
-Bits and bolts for simple machine learning
 
-1/ DATA EXPLORATION
-2/ UNIVARIATE GRAPHING
-3/ MULTIVARIATE GRAPHING
-5/ GRID SEARCH (Model parametrization)
-6/ MODEL ASSESSMENT
+Bits and bolts for visual data exploration
+
+1. DATA EXPLORATION
+2. UNIVARIATE GRAPHING
+3. MULTIVARIATE GRAPHING
+4. VRAC - Bit and Bolt
+
+
+
+
 """
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import scipy.stats
+
 
 from pathlib import Path
 CWD = Path.cwd()
@@ -24,8 +29,11 @@ plt_wd = 345 * 2 # In points
 
 
 
+
+
+
 #%%#############################################################################
-#BOOK#################### UNIVARIATE GRAPHING ##################################
+#BOOK#################### 1. DATA EXPLOTRATION #################################
 ################################################################################
 
 #%%------------------------------ Set Size ------------------------------------#
@@ -55,7 +63,7 @@ def set_size(width, norow, nocol, fraction=1):
 
 
 #%%#############################################################################
-#BOOK#################### UNIVARIATE GRAPHING ##################################
+#BOOK#################### 2. UNIVARIATE GRAPHING ###############################
 ################################################################################
 
 
@@ -90,7 +98,7 @@ def graph_univar(df_data, list_var, var_type):
 
 
 #%%#############################################################################
-#BOOK########### UNIVARIATE GRAPHING with PRED #################################
+#BOOK########### 3. UNIVARIATE GRAPHING with PRED ##############################
 ################################################################################
 
 def graph_univar_pred(df_data, list_var, col_predict , var_type):
@@ -182,7 +190,7 @@ def graph_univar_pred2(df_data_, list_var, col_predict, var_type):
 
 
 #%%#############################################################################
-#BOOK#################### MULTIVARIATE GRAPHING ################################
+#BOOK#################### 4. MULTIVARIATE GRAPHING #############################
 ################################################################################
 #%%---------------------------------- NUM with CAT ----------------------------#
 def graph_multvar_numcat(df_data, list_numvar, list_catvar):
@@ -300,3 +308,33 @@ def graph_balloon(dF, x, y, axe):
     axe.set_yticklabels(yax_dict.keys())
     return axe    
 
+
+
+#%%#############################################################################
+#BOOK######################### 4.BITS AND BOLTS ################################
+################################################################################
+
+"""
+# ----------------- Optional save graph
+if graph_ouput == True: 
+    myplotname = mp_name + '_MP_2AEReturns_Scatt' + picout_extension
+    fig.savefig(spath + myplotname)
+
+
+# ----------------- Graph quantiles
+fig, axes = plt.subplots(3, 1, figsize=ipalib.set_size(plt_wd, 3, 1), sharex=True)
+l_quantile=[5, 25, 50, 75, 95]
+
+dF_temp = np.percentile(npz_Sim_T['AE_DeathSA'], l_quantile, axis=1)
+dF_temp = pd.DataFrame(dF_temp, index=l_quantile)
+dF_temp = pd.melt(dF_temp.reset_index(), id_vars='index', var_name='Year', value_name='AE_DeathSA')
+
+sns.lineplot(data=dF_temp, x='Year', y='AE_DeathSA', hue='index', ax=axes[0], color=pal[3])
+
+
+
+
+
+
+
+"""
