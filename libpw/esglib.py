@@ -5,6 +5,24 @@ import numpy as np
 
 
 
+
+
+#%%#############################################################################
+################## 1. TRANSFORM NUMPY SQUARE in PD LONG  #######################
+################################################################################
+
+
+
+
+
+
+
+#%%#############################################################################
+############################# 2. RESULT ANALYSIS  ##############################
+################################################################################
+
+
+
 def calculate_percentile(dF_data, list_agg, col_res, list_percentile):
     '''
     Calculate the mean and percentile on a flat ESG file
@@ -48,7 +66,7 @@ def calculate_vol(dF_data, list_agg, col_res, list_percentile, i_step):
     '''
     # -------- Vol
     dF_Result =  dF_data.groupby(list_agg).std()[col_res].reset_index()
-    dF_Result[col_res] =  dF_Result[col_res] * np.sqrt( 12 / i_step )
+    dF_Result[col_res] =  dF_Result[col_res] * np.sqrt( i_step )
     dF_Result['Indicator'] = 'Vol'
     dF_Result.reset_index()
     # ------- Set Index
@@ -56,3 +74,5 @@ def calculate_vol(dF_data, list_agg, col_res, list_percentile, i_step):
     dF_Result = dF_Result.set_index(list_index)
     # dF_Result = dF_Result.reset_index()
     return dF_Result
+
+
