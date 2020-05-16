@@ -33,7 +33,7 @@ plt_wd = 345 * 2 # In points
 
 
 #%%#############################################################################
-#BOOK#################### 1. DATA EXPLOTRATION #################################
+#BOOK#################### 1. DATA EXPLORATION ##################################
 ################################################################################
 
 #%%------------------------------ Set Size ------------------------------------#
@@ -70,13 +70,13 @@ def set_size(width, norow, nocol, fraction=1):
 def graph_univar(df_data, list_var, var_type):
     """
     Graph very simple univariate for each variable
-    var_type = 
+    var_type =
         "num" if numeric:       Distplot
         "cat" if categorical:   Countplot
     """
     #----------- Histograms for Numerical variable
     # Setup the graph subplot
-    fig, axs = plt.subplots(len(list_var), 1, 
+    fig, axs = plt.subplots(len(list_var), 1,
             figsize=set_size(plt_wd, len(list_var), 1))
     fig.subplots_adjust(hspace = 0.3) # Adjust space between rows
     # loop for graphing
@@ -104,12 +104,12 @@ def graph_univar(df_data, list_var, var_type):
 def graph_univar_pred(df_data, list_var, col_predict , var_type):
     """
     Graph univariate for each variable in list compared with numerical prediction (label in dF)
-        var_type = 
+        var_type =
         "num" if numeric:       Violin Chart
         "cat" if categorical:   Barplot count
     """
     # Setup the graph subplot
-    fig, axs = plt.subplots(len(list_var), 1, 
+    fig, axs = plt.subplots(len(list_var), 1,
             figsize=set_size(plt_wd, len(list_var), 1))
     fig.subplots_adjust(hspace = 0.3) # Adjust space between rows
     # loop for graphing
@@ -133,19 +133,19 @@ def graph_univar_pred(df_data, list_var, col_predict , var_type):
 
 def graph_univar_pred2(df_data_, list_var, col_predict, var_type):
     """
-    Graph univariate for each variable in list and each value in col_predict (one column per value) 
+    Graph univariate for each variable in list and each value in col_predict (one column per value)
     NumVar: Histogram
     Repeat histogram for each of col_predict unique value
     """
-    
+
     # --------------- Prepare data and Graph ----------------------------------#
     df_data = df_data_.copy() # Make a copy because CatType transcends the function....
     num_col = df_data[col_predict].nunique() # Nunique sizre
     # Setup the graph subplot
-    fig, axs = plt.subplots(len(list_var), num_col + 1, 
+    fig, axs = plt.subplots(len(list_var), num_col + 1,
             figsize=set_size(plt_wd, len(list_var), num_col + 1), sharex = 'row')
     fig.subplots_adjust(hspace = 0.3) # Adjust space between rows
-    
+
     #---------------- ReType Categories properly ------------------------------#
     # Need to type properly to avoid missing data in sharex
     from pandas.api.types import CategoricalDtype
@@ -155,7 +155,7 @@ def graph_univar_pred2(df_data_, list_var, col_predict, var_type):
             unique_val = [x for x in unique_val if str(x) != 'nan']
             cat_type = CategoricalDtype(categories=list(unique_val), ordered=True)
             df_data[col] =  df_data[col].astype(cat_type)
-    
+
     # ------------------- Loop for graphing -----------------------------------#
     for j in range(num_col + 1): # Columns
         if j == 0: # graph all data in first column
@@ -167,7 +167,7 @@ def graph_univar_pred2(df_data_, list_var, col_predict, var_type):
         # Add graph title with count and %
         count = dF_dummy.shape[0]
         pct = count / df_data.shape[0]
-        text = "Name: " + str(cat) + "  # Obs:" + str(count) + "  Prop: " + "{0:.0%}".format(pct) 
+        text = "Name: " + str(cat) + "  # Obs:" + str(count) + "  Prop: " + "{0:.0%}".format(pct)
         axs[0, j].set_title(text, fontsize=16)
         for i, item in enumerate(list_var): # loop on rows
             dF_dummy2 = dF_dummy.loc[dF_dummy[item].isna() == False] # Exclude Nan
@@ -200,7 +200,7 @@ def graph_multvar_numcat(df_data, list_numvar, list_catvar):
     CatVar: Barplot count
     """
     # Setup the graph subplot
-    fig, axs = plt.subplots(len(list_numvar), len(list_catvar), 
+    fig, axs = plt.subplots(len(list_numvar), len(list_catvar),
             figsize=set_size(plt_wd, len(list_numvar), len(list_catvar)))
     fig.subplots_adjust(hspace = 0.3)
     # Graphing loop
@@ -228,7 +228,7 @@ def graph_multvar_numnum(df_data, list_numvar, **kwargs):
     None.
     """
     # Setup the graph subplot
-    fig, axs = plt.subplots(len(list_numvar), len(list_numvar), 
+    fig, axs = plt.subplots(len(list_numvar), len(list_numvar),
             figsize=set_size(plt_wd, len(list_numvar), len(list_numvar)))
     fig.subplots_adjust(hspace = 0.3)
     # Graphing loop
@@ -250,7 +250,7 @@ def graph_multvar_catcat(df_data, list_catvar):
     Using Balloon Chart
     """
     # Setup the graph subplot
-    fig, axs = plt.subplots(len(list_catvar), len(list_catvar), 
+    fig, axs = plt.subplots(len(list_catvar), len(list_catvar),
             figsize=set_size(plt_wd, len(list_catvar), len(list_catvar)))
     fig.subplots_adjust(hspace = 0.3)
     # Graphing loop
@@ -271,7 +271,7 @@ def graph_balloon(dF, x, y, axe):
     """
     Prepare balloon chart with dF[x, y]
     Chart is prepared as an Axes object
-    
+
     """
     # Data
     dF_data = dF.groupby([x,y])[y].count()
@@ -295,7 +295,7 @@ def graph_balloon(dF, x, y, axe):
     # --------------------------- Map the data --------------------------------#
     dF_data[x + '_'] = dF_data[x].map(xax_dict)
     dF_data[y +'_'] = dF_data[y].map(yax_dict)
-    
+
     # -------------------------------- Graph ----------------------------------#
     sns.scatterplot(x=x + '_', y=y +'_', size='value', data=dF_data,
                 sizes=(min_size, max_size), ax = axe, hue='value')
@@ -306,7 +306,7 @@ def graph_balloon(dF, x, y, axe):
     axe.set_yticks(np.arange(len(yax_dict)))
     axe.set_xticklabels(xax_dict.keys())
     axe.set_yticklabels(yax_dict.keys())
-    return axe    
+    return axe
 
 
 
@@ -316,7 +316,7 @@ def graph_balloon(dF, x, y, axe):
 
 """
 # ----------------- Optional save graph
-if graph_ouput == True: 
+if graph_ouput == True:
     myplotname = mp_name + '_MP_2AEReturns_Scatt' + picout_extension
     fig.savefig(spath + myplotname)
 
